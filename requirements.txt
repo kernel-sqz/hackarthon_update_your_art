@@ -1,0 +1,10 @@
+Django
+django-cors-headers
+django-rest-framework
+djangorestframework
+
+requests
+django_rest_passwordreset
+
+python-decouple
+whitenoise
