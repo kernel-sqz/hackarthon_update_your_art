@@ -1,10 +1,17 @@
-React:
-/frontend
-  >>> npm i
-  >>> npm start
+# UpdateYourArt
 
-Django:
-  ./
-    >>>pip install -r requirements.txt
-    /backend/backend
-      >>> python manage.py runserver
+
+
+# Backend (django)
+
+## ./ 
+>>>$ pip install -r requirements.txt 
+## /backend/backend 
+>>>$ python manage.py runserver
+
+# Frontend (react)
+
+## /frontend
+>>>$ npm i 
+>>>$ npm start
+
