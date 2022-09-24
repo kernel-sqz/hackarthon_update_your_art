@@ -20,7 +20,9 @@ class Zacheta(models.Model):
 
 
 class OtherPaintings(models.Model):
-    url = models.URLField()
+    guid = models.URLField()
+    preview = models.URLField(default="example.com/non-existing-preview")
+    full = models.URLField(default="example.com/non-existing-full")
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     zacheta = models.ForeignKey(Zacheta, on_delete=models.CASCADE)
