@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from .serializers import *
+from rest_framework import views
+from rest_framework.response import Response
 
 
 class AuthorView(viewsets.ModelViewSet):
@@ -28,3 +30,9 @@ class OtherPaintingsView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return OtherPaintings.objects.all()
+
+
+class EuropeanaView(views.APIView):
+    def get(self, request, format=None):
+        tags = [tag.tag for tag in Tag.objects.all()]
+        return Response(tags)

@@ -15,4 +15,5 @@ router.register(r'others', OtherPaintingsView, 'others')
 urlpatterns = [
 
     path('api/', include((router.urls))),
+    path('api/europeana', EuropeanaView.as_view())
 ]
