@@ -6,10 +6,4 @@ An app for teachers and students about classical and modern arts. Done for Hack(
 
 ## Dependencies
 
-Dependencies below can be installed with `python -m pip install ...`.
-
-- django
-- django-cors-headers
-- djangorestframework
-- whitenoise
-- requests
+Dependencies below can be installed with `python -m pip install -r requirements.txt`
