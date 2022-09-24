@@ -12,3 +12,4 @@ Dependencies below can be installed with `python -m pip install ...`.
 - django-cors-headers
 - djangorestframework
 - whitenoise
+- requests

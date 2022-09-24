@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from .serializers import *
 from rest_framework import views
 from rest_framework.response import Response
+import requests
 
 
 class AuthorView(viewsets.ModelViewSet):
@@ -33,6 +34,30 @@ class OtherPaintingsView(viewsets.ModelViewSet):
 
 
 class EuropeanaView(views.APIView):
+    searchUrl = r'https://api.europeana.eu/record/search.json'
+    key = 'ibleauck'
+
     def get(self, request, format=None):
         tags = [tag.tag for tag in Tag.objects.all()]
-        return Response(tags)
+        params = {
+            "wskey": self.key,
+            "media": True,
+            "query": request.query_params["query"],
+            "start": request.query_params.get("start", "1")
+            }
+        resp = requests.get(self.searchUrl, params=params)
+        return Response({"tags": tags, "art": self.process(resp.json())})
+
+    def process(self, search):
+        # return search
+        return {
+            "success": search["success"],
+            "itemsCount": search["itemsCount"],
+            "totalResults": search["totalResults"],
+            "items": [{
+                    "title": item["title"],
+                    "guid": item["guid"],
+                    "preview": item["edmPreview"],
+                    "full": item["edmIsShownBy"]
+                } for item in search["items"]]
+            }
