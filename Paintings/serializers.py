@@ -28,4 +28,5 @@ class OtherPaintingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OtherPaintings
-        fields = ('id', 'url', 'author', 'tags', 'zacheta', 'description')
+        fields = ('id', 'guid', 'preview', 'full', 'author',
+                  'tags', 'zacheta', 'description')

@@ -46,9 +46,12 @@ class EuropeanaView(views.APIView):
             "start": request.query_params.get("start", "1")
             }
         resp = requests.get(self.searchUrl, params=params)
-        return Response({"tags": tags, "art": self.process(resp.json())})
 
-    def process(self, search):
+        return Response({"tags": tags,
+                         "art": self.process(resp.json(),
+                                             OtherPaintings.objects.all())})
+
+    def process(self, search, added):
         # return search
         return {
             "success": search["success"],
@@ -58,6 +61,13 @@ class EuropeanaView(views.APIView):
                     "title": item["title"],
                     "guid": item["guid"],
                     "preview": item["edmPreview"],
-                    "full": item["edmIsShownBy"]
+                    "full": item["edmIsShownBy"],
+                    "tags": self._getTags(item["guid"], added)
                 } for item in search["items"]]
             }
+
+    def _getTags(self, guid, added):
+        a = [ad for ad in added if ad.guid == guid]
+        if len(a) != 1:
+            return []
+        return [tag.tag for tag in a[0].tags.all()]
